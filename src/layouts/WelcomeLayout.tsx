@@ -1,6 +1,7 @@
 import { animated, useTransition } from '@react-spring/web'
 import type { ReactNode } from 'react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import logo from '../assets/images/logo.svg'
 
@@ -15,12 +16,19 @@ export const WelcomeLayout: React.FC = () => {
   const location = useLocation()
   const map = useRef<Record<string, ReactNode>>({})
   const outlet = useOutlet()
+  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
   map.current[location.pathname] = outlet
   const transitions = useTransition(location.pathname, {
     from: { transform: location.pathname === '/welcome/1' ? 'translateX(0%)' : 'translateX(100%)' },
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
-    config: { duration: 300 }
+    config: { duration: 300 },
+    onStart: () => {
+      setExtraStyle({ position: 'absolute' })
+    },
+    onRest: () => {
+      setExtraStyle({ position: 'relative' })
+    }
   })
 
   return (
@@ -31,12 +39,12 @@ export const WelcomeLayout: React.FC = () => {
         <img src={logo} w-64px h-69px />
         <h1 text="#D4D4EE">山竹记账</h1>
       </header>
-      <main shrink-1 grow-1  m-16px >
+      <main shrink-1 grow-1 relative >
         {transitions((style, pathname) =>
-          <animated.div key={pathname} style={style} bg-white w="100%" h="100%"
-          rounded-8px flex justify-center items-center
-          >
-            {map.current[pathname]}
+          <animated.div key={pathname} style={{ ...style, ...extraStyle }} w="100%" h="100%" p-16px flex>
+            <div grow-1 bg-white flex justify-center items-center rounded-8px>
+              {map.current[pathname]}
+            </div>
           </animated.div>
         )}
       </main>
