@@ -16,8 +16,9 @@ export const WelcomeLayout: React.FC = () => {
   const location = useLocation()
   const map = useRef<Record<string, ReactNode>>({})
   const outlet = useOutlet()
-  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
+  const [extraStyle, setExtraStyle] = useState<{ position: 'relative' | 'absolute' }>({ position: 'relative' })
   map.current[location.pathname] = outlet
+
   const transitions = useTransition(location.pathname, {
     from: { transform: location.pathname === '/welcome/1' ? 'translateX(0%)' : 'translateX(100%)' },
     enter: { transform: 'translateX(0%)' },
