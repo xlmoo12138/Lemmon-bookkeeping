@@ -1,11 +1,12 @@
 import { animated, useTransition } from '@react-spring/web'
 import type { ReactNode } from 'react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { Link, useLocation, useOutlet } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useOutlet } from 'react-router-dom'
 import logo from '../assets/images/logo.svg'
+import { useSwipe } from '../hooks/useSwipe'
 
-const linkMap: any = {
+const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
   '/welcome/2': '/welcome/3',
   '/welcome/3': '/welcome/4',
@@ -13,6 +14,7 @@ const linkMap: any = {
 }
 
 export const WelcomeLayout: React.FC = () => {
+  const animating = useRef(false)
   const location = useLocation()
   const map = useRef<Record<string, ReactNode>>({})
   const outlet = useOutlet()
@@ -28,10 +30,21 @@ export const WelcomeLayout: React.FC = () => {
       setExtraStyle({ position: 'absolute' })
     },
     onRest: () => {
+      animating.current = false
       setExtraStyle({ position: 'relative' })
     }
   })
 
+  const main = useRef<HTMLElement>(null)
+  const { direction } = useSwipe(main, { onTouchStart: e => e.preventDefault() })
+  const nav = useNavigate()
+  useEffect(() => {
+    if (direction === 'left') {
+      if (animating.current) { return }
+      animating.current = true
+      nav(linkMap[location.pathname])
+    }
+  }, [direction, location.pathname, linkMap])
   return (
     <div className="bg-#5f34bf" h-screen flex flex-col
       items-stretch pb-16px
@@ -40,7 +53,7 @@ export const WelcomeLayout: React.FC = () => {
         <img src={logo} w-64px h-69px />
         <h1 text="#D4D4EE">山竹记账</h1>
       </header>
-      <main shrink-1 grow-1 relative >
+      <main shrink-1 grow-1 relative ref={main}>
         {transitions((style, pathname) =>
           <animated.div key={pathname} style={{ ...style, ...extraStyle }} w="100%" h="100%" p-16px flex>
             <div grow-1 bg-white flex justify-center items-center rounded-8px>
