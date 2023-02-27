@@ -25,7 +25,7 @@ export const WelcomeLayout: React.FC = () => {
     from: { transform: location.pathname === '/welcome/1' ? 'translateX(0%)' : 'translateX(100%)' },
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
-    config: { duration: 300 },
+    config: { duration: 1000 },
     onStart: () => {
       setExtraStyle({ position: 'absolute' })
     },
@@ -45,6 +45,11 @@ export const WelcomeLayout: React.FC = () => {
       nav(linkMap[location.pathname])
     }
   }, [direction, location.pathname, linkMap])
+
+  const onSkip = () => {
+    localStorage.setItem('hasReadWelcomes', 'yes')
+    window.console.log('存储了 localStorage')
+  }
   return (
     <div className="bg-#5f34bf" h-screen flex flex-col
       items-stretch pb-16px
@@ -64,7 +69,7 @@ export const WelcomeLayout: React.FC = () => {
       </main>
       <footer shrink-0 text-center text-24px text-white grid grid-cols-3 grid-rows-1>
         <Link style={{ gridArea: '1 / 2 / 2 / 3' }} to={linkMap[location.pathname]}>下一页</Link>
-        <Link style={{ gridArea: '1 / 3 / 2 / 4' }} to='/welcome/xxx'>跳过</Link>
+        <Link style={{ gridArea: '1 / 3 / 2 / 4' }} to='/home' onClick={onSkip}>跳过</Link>
       </footer>
     </div>
   )

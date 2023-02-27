@@ -21,7 +21,7 @@ export const useSwipe = (elementRef: RefObject<HTMLElement>, config?: Config) =>
       setDirection('')
     } else if (d > 0) {
       setDirection('right')
-    } else if (d < 0) {
+    } else {
       setDirection('left')
     }
   }
