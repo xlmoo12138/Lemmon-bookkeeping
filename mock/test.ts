@@ -3,22 +3,33 @@ export default [
   {
     url: '/api/v1/me',
     method: 'get',
-    response: () => {
+    timeout: 1000,
+    response: (): Resource<User> => {
       return {
-        id: 1,
-        email: 'kirdoyz@gmail.com',
+        resource: {
+          id: 1,
+          email: 'kirdoyz@gmail.com',
+          updated_at: '2021-08-01T00:00:00.000Z',
+          created_at: '2021-08-01T00:00:00.000Z',
+        }
       }
     },
   },
   {
     url: '/api/v1/items',
     method: 'get',
-    response: () => {
+    timeout: 1000,
+    response: (): Resources<Item> => {
       return {
         resources: [{
           id: 1,
           user_id: 1,
           amount: 1000,
+          tag_ids: [1, 2],
+          happen_at: '2021-08-01T00:00:00.000Z',
+          created_at: '2021-08-01T00:00:00.000Z',
+          updated_at: '2021-08-01T00:00:00.000Z',
+          kind: 'expenses',
         }],
         pager: {
           page: 1,
