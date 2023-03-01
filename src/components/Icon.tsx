@@ -1,5 +1,4 @@
 import c from 'classnames'
-import s from './Icon.module.scss'
 interface Props {
   name: string
   className?: string
@@ -7,7 +6,7 @@ interface Props {
 
 export const Iocn: React.FC<Props> = ({ name, className }) => {
   return (
-    <svg className={c(className, s.icon)}>
+    <svg className={c(className, 'j-icon')}>
       <use xlinkHref={`#${name}`}></use>
     </svg >
   )
