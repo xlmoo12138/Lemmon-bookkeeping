@@ -1,10 +1,10 @@
+import { Iocn } from './Icon'
+
 export const AddItemFloatButton: React.FC = () => {
   return (
-    <button p-4px w-56px h-56px bg="#5C33BE" b-none rounded="50%"
-       fixed bottom-16px right-16px>
-      <svg style={{ fill: 'red', width: '1.2em', height: '1.2em' }}>
-        <use xlinkHref='#menu'></use>
-      </svg>
+    <button w-56px h-56px bg="#5C33BE" b-none rounded="50%" text-white
+       fixed bottom-16px right-16px flex justify-center items-center >
+      <Iocn name="add" className="w-48px h-48px" />
     </button>
   )
 }
