@@ -29,7 +29,7 @@ export const Home: React.FC<Props> = (props) => {
     return <Navigate to="/items" />
   }
 
-  window.console.log(meData, meError, itemsData, itemsError)
+  // window.console.log(meData, meError, itemsData, itemsError)
   return (
     <div>
       <div flex justify-center>

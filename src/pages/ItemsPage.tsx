@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import styled from 'styled-components'
 import { AddItemFloatButton } from '../components/AddItemFloatButton'
 import type { TimeRange } from '../components/TimeRangePicker'
@@ -16,7 +15,6 @@ const Div = styled.div`
 
 export const ItemsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('thisMonth')
-  const { visible, setVisible } = useMenuStore()
   const [items] = useState<Item[]>([
     {
       id: 1,
@@ -38,6 +36,10 @@ export const ItemsPage: React.FC = () => {
       updated_at: '2021-01-01T00:00:00.000Z',
     }
   ])
+  const { visible, setVisible } = useMenuStore()
+  // false => true
+  // visible: true ; maskVisible 不存在
+
   return (
     <div>
       <Div>
@@ -47,7 +49,7 @@ export const ItemsPage: React.FC = () => {
       <ItemsSummary />
       <ItemsList items={items} />
       <AddItemFloatButton />
-      {visible ? <TopMenu onClickMask={() => setVisible(false)} /> : null}
+      <TopMenu visible={visible} onClickMask={() => { setVisible(false) }} />
     </div>
   )
 }
