@@ -16,8 +16,8 @@ const Div = styled.div`
 
 export const ItemsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('thisMonth')
-  const { visible } = useMenuStore()
-  const [items, setItems] = useState<Item[]>([
+  const { visible, setVisible } = useMenuStore()
+  const [items] = useState<Item[]>([
     {
       id: 1,
       kind: 'incomes',
@@ -47,7 +47,7 @@ export const ItemsPage: React.FC = () => {
       <ItemsSummary />
       <ItemsList items={items} />
       <AddItemFloatButton />
-      {visible && <TopMenu />}
+      {visible ? <TopMenu onClickMask={() => setVisible(false)} /> : null}
     </div>
   )
 }
