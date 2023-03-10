@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 使用方法
 
 ## 开发
@@ -14,3 +15,6 @@ bin/deploy_to_github.sh
 #或
 sh bin/deploy_to_github.sh
 ```
+=======
+# Lemmon-bookkeeping
+>>>>>>> e94e3d9372008c269c8a661cd8622bb6432f6e14
