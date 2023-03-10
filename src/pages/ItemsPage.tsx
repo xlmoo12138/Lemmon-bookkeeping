@@ -38,7 +38,7 @@ export const ItemsPage: React.FC = () => {
   ])
   const { visible, setVisible } = useMenuStore()
   // false => true
-  // visible: true ; maskVisible 不存在
+  // visible: true  maskVisible 不存在
 
   return (
     <div>

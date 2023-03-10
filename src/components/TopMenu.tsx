@@ -9,6 +9,7 @@ interface Props {
 }
 export const TopMenu: React.FC<Props> = (props) => {
   const { onClickMask, visible } = props
+  // 这个state会在组件销毁时，自然销毁
   const [maskVisible, setMaskVisible] = useState(visible)
   const maskStyles = useSpring({
     opacity: visible ? 1 : 0,
