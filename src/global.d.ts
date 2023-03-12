@@ -30,6 +30,7 @@ interface Item {
   happen_at: string
   created_at: string
   updated_at: string
-  kind: 'expenses' | 'incomes'
+  kind: 'expenses' | 'income'
   deleted_at?: string
 }
+
