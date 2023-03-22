@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { time } from '../lib/time'
 
 type Props = {
   start?: Date
@@ -7,6 +8,7 @@ type Props = {
 }
 export const DatePicker: React.FC<Props> = (props) => {
   const { start, end, value } = props
+  window.console.log(time().add(10, 'year').format())
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
   const [translateY, setTranslateY] = useState(0)
