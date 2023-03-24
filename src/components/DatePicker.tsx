@@ -1,14 +1,24 @@
 import { useState } from 'react'
 import { time } from '../lib/time'
 
-type Props = {
+export const DatePicker: React.FC = () => {
+  return (
+    <div flex>
+      <Column className="grow-1"/>
+      <Column className="grow-1"/>
+      <Column className="grow-1"/>
+    </div>
+  )
+}
+type ColumnProps = {
+  className?: string
   start?: Date
   end?: Date
   value?: Date
   itemHeight?: number
 }
-export const DatePicker: React.FC<Props> = (props) => {
-  const { start, end, value, itemHeight = 36 } = props
+export const Column: React.FC<ColumnProps> = (props) => {
+  const { start, end, value, itemHeight = 36, className } = props
   const startTime = start ? time(start) : time().add(-10, 'years')
   const endTime = end ? time(end) : time().add(10, 'years')
   const valueTime = value ? time(value) : time()
@@ -27,7 +37,7 @@ export const DatePicker: React.FC<Props> = (props) => {
     _setTranslateY(y)
   }
   return (
-    <div h="50vh" overflow-hidden relative
+    <div className={className} h="50vh" overflow-hidden relative
     onTouchStart={(e) => {
       setIsTouching(true)
       setLastY(e.touches[0].clientY)
@@ -50,7 +60,7 @@ export const DatePicker: React.FC<Props> = (props) => {
       setIsTouching(false)
     }}
   >
-    <div b-1 b-red absolute top="50%" w-full style={{ height: itemHeight, transform: `translateY(${itemHeight / 2}px)` }} />
+    <div border-b-1 border-t-1 b="#eee" absolute top="50%" w-full style={{ height: itemHeight, transform: `translateY(${itemHeight / 2}px)` }} />
     <div absolute top="50%" w-full style={{ transform: `translateY(${itemHeight / 2}px)` }} >
       <ol style={{ transform: `translateY(${translateY}px)` }}
          text-center children-flex children-items-center children-justify-center

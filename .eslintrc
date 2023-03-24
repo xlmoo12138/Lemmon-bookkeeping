@@ -4,6 +4,7 @@
     "curly": "off",
     "max-statements-per-line": ["error", { "max": 2 }],
     "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/brace-style": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
