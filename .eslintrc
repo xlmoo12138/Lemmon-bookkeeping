@@ -4,6 +4,7 @@
     "curly": "off",
     "max-statements-per-line": ["error", { "max": 3 }],
     "arrow-parens": "off",
+    "unicorn/prefer-includes": "off",
     "@typescript-eslint/lines-between-class-members": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/brace-style": "off",
