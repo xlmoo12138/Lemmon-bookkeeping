@@ -1,6 +1,6 @@
-import { DatePicker } from '../../components/DatePicker'
 import { Icon } from '../../components/Icon'
 import { usePopup } from '../../hooks/usePopup'
+import { DatePicker } from '../../components/DatePicker'
 
 type Props = {
   className?: string
@@ -8,7 +8,9 @@ type Props = {
 export const DateAndAmount: React.FC<Props> = (props) => {
   const { className } = props
 
-  const { popup, toggle } = usePopup(true, <DatePicker onChange={d => window.console.log(d.toLocaleDateString())} />)
+  const { popup, toggle, hide } = usePopup(true, <DatePicker
+    onCancel={() => hide()}
+    onConfirm={d => { window.console.log(d.toLocaleString()); hide() }} />)
   return (
     <>
       <div className={className}>
