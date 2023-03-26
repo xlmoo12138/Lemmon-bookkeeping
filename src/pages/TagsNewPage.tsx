@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { emojiList } from '../lib/emojiList'
 import { emojis } from '../lib/emojis'
 
 export const TagsNewPage: React.FC = () => {
   const [emojiKind, setEmojiKind] = useState('表情')
   const onSubmit = () => { }
-  window.console.log(emojiList)
   return (
     <div>
       <form onSubmit={onSubmit}>
