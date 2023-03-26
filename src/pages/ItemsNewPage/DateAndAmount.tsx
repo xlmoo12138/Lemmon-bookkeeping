@@ -38,6 +38,10 @@ export const DateAndAmount: React.FC<Props> = (props) => {
   const clear = () => {
     setOutput('0')
   }
+  const remove = () => {
+    const char = output.slice(0, -1)
+    setOutput(char)
+  }
   return (
     <>
       <div className={className}>
@@ -63,7 +67,11 @@ export const DateAndAmount: React.FC<Props> = (props) => {
           <button row-start-3 col-start-3 row-end-4 col-end-4 onClick={() => append('9')}>9</button>
           <button row-start-4 col-start-1 row-end-5 col-end-3 onClick={() => append('0')}>0</button>
           <button row-start-4 col-start-3 row-end-5 col-end-4 onClick={() => append('.')}>.</button>
-          <button row-start-1 col-start-4 row-end-3 col-end-5 onClick={clear}>清空</button>
+          <button row-start-1 col-start-4 row-end-2 col-end-5 flex items-center justify-center
+            onClick={remove}>
+            <Icon name="delete" className='w-36px h-36px grow-0 shrink-0'/>
+          </button>
+          <button row-start-2 col-start-4 row-end-3 col-end-5 onClick={clear}>清空</button>
           <button row-start-3 col-start-4 row-end-5 col-end-5
             bg="#5C33BE" text-white onClick={() => { }}>提交</button>
         </div>
