@@ -1,9 +1,10 @@
+import type { ReactNode } from 'react'
 import { EmojiInput } from './Input/EmojiInput'
 
 type Props = {
-  label: string
+  label: string | ReactNode
   placeholder?: string
-  type?: 'text' | 'emoji'
+  type?: 'text' | 'emoji' | 'sms_code'
   value?: string
   onChange?: (value: string) => void
   error?: string
@@ -16,7 +17,16 @@ export const Input: React.FC<Props> = (props) => {
         return <input j-input-text type={type} placeholder={placeholder}
           value={value} onChange={e => onChange?.(e.target.value)} />
       case 'emoji':
-        return <EmojiInput />
+        return <EmojiInput value={value} onChange={value => onChange?.(value)} />
+      case 'sms_code':
+        return (
+          <div flex gap-x-16px>
+            <input max-w="[calc(40%-8px)]" j-input-text type={type} placeholder={placeholder}
+              value={value} onChange={e => onChange?.(e.target.value)}
+            />
+            <button max-w="[calc(60%-8px)]" j-btn>发送验证码</button>
+          </div>
+        )
       default:
         return null
     }
@@ -26,7 +36,7 @@ export const Input: React.FC<Props> = (props) => {
       <div flex flex-col gap-y-8px>
         <span text-18px>{label}</span>
         {renderInput()}
-        <span text-red text-18px>{error || '\u00A0'}</span>
+        <span text-red text-12px>{error || '　'}</span>
       </div>
     </>
   )
