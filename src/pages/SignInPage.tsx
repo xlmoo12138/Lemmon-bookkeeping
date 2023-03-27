@@ -2,6 +2,7 @@ import type { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
+import { Input } from '../components/Input'
 import { TopNav } from '../components/TopNav'
 import { ajax } from '../lib/ajax'
 import { hasError, validate } from '../lib/validate'
@@ -36,12 +37,9 @@ export const SignInPage: React.FC = () => {
         <h1 text-32px text="#7878FF" font-bold>柠萌记账</h1>
       </div>
       <form j-form onSubmit={onSubmit}>
-        <div>
-          <span j-form-label>邮箱地址 {error.email?.[0] && <span text-red>{ error.email[0] }</span>}</span>
-          <input j-input-text type="text" placeholder='请输入邮箱，然后点击发送验证码'
-            value={data.email} onChange={e => setData({ email: e.target.value })}
-          />
-        </div>
+        <Input label='邮箱地址' type='text' placeholder='请输入邮箱，然后点击发送验证码'
+          value={data.email} onChange={value => setData({ email: value })}
+          error={error.email?.[0]} />
         <div>
           <span j-form-label>验证码 {error.code?.[0] && <span text-red>{ error.code[0] }</span>}</span>
           <div flex gap-x-16px>
