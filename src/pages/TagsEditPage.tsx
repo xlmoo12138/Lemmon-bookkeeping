@@ -3,13 +3,16 @@ import { Icon } from '../components/Icon'
 import { TopNav } from '../components/TopNav'
 import { TagForm } from './TagsNewPage/TagForm'
 
-export const TagsNewPage: React.FC = () => {
+export const TagsEditPage: React.FC = () => {
   return (
     <div>
       <Gradient className="grow-0 shrink-0">
-        <TopNav title="新建标签" icon={<Icon name="back" />} />
+        <TopNav title="查看标签" icon={<Icon name="back" />} />
       </Gradient>
-      <TagForm type='create'/>
+      <TagForm type='edit' />
+      <div p-x-16px p-b-32px>
+        <button j-btn bg="#E10505">删除</button>
+      </div>
     </div>
   )
 }
