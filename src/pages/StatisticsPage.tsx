@@ -9,10 +9,19 @@ import { LineChart } from '../components/LineChart'
 export const StatisticsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('thisMonth')
   const items = [
-    { date: '2000-1-1', value: 150 },
-    { date: '2000-1-2', value: 350 },
-    { date: '2000-1-31', value: 250 }
-  ].map(item => ({ x: item.date, y: item.value }))
+    { date: '2000-1-1', value: 15000 },
+    { date: '2000-1-3', value: 35000 },
+    { date: '2000-1-4', value: 45000 },
+    { date: '2000-1-5', value: 55000 },
+    { date: '2000-1-6', value: 65000 },
+    { date: '2000-1-7', value: 75000 },
+    { date: '2000-1-8', value: 85000 },
+    { date: '2000-1-9', value: 95000 },
+    { date: '2000-1-10', value: 105000 },
+    { date: '2000-1-11', value: 115000 },
+    { date: '2000-1-12', value: 125000 },
+    { date: '2000-1-31', value: 135000 }
+  ].map(item => ({ x: item.date, y: item.value / 100 }))
   return (
     <div>
       <Gradient>
@@ -21,7 +30,7 @@ export const StatisticsPage: React.FC = () => {
         } />
       </Gradient>
       <TimeRangePicker selected={timeRange} onSelect={setTimeRange} />
-      <LineChart className="h-400px" items={items} />
+      <LineChart className="h-120px" items={items} />
     </div>
   )
 }
