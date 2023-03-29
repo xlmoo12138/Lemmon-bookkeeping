@@ -27,7 +27,7 @@ export const RankChart: React.FC<Props> = (props) => {
             rounded-4px overflow-hidden bg="#ccc" relative>
             <div absolute h-full rounded-4px
               style={{ background: colors[index], width: `${item.value / max * 100}%` }} />
-          </div>
+        </div>
       </div>
       )
     )
