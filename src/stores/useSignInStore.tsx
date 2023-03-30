@@ -14,8 +14,8 @@ interface SignIn {
 export const useSignInStore = create<SignIn>((set, get) => (
   {
     data: {
-      // TODO: 删除这个邮箱地址
-      email: '1354786446@qq.com',
+      // TODO: 删除这个邮箱地址 2516629927@qq.com
+      email: '2387870957@qq.com',
       code: ''
     },
     error: {
