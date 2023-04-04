@@ -2,6 +2,7 @@ import type { AxiosError } from 'axios'
 import axios from 'axios'
 import type { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
 import { Input } from '../components/Input'
@@ -12,6 +13,13 @@ import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignInStore'
 import { usePopup } from '../hooks/usePopup'
 
+const Spin = styled(Icon)`
+animation: spin 1s linear infinite;
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+`
 export const SignInPage: React.FC = () => {
   const { data, error, setData, setError } = useSignInStore()
   const nav = useNavigate()
@@ -41,7 +49,11 @@ export const SignInPage: React.FC = () => {
       nav('/home')
     }
   }
-  const { popup, hide, show } = usePopup({ initialVisible: false, children: <div>加载中</div>, position: 'center' })
+  const { popup, hide, show } = usePopup({
+    initialVisible: false,
+    children: <div><Spin className="w-32px h-32px" name="loading"/></div>,
+    position: 'center'
+  })
   const sendSmsCode = async () => {
     const newError = validate({ email: data.email }, [
       { key: 'email', type: 'pattern', regex: /^.+@.+$/, message: '邮箱地址格式不正确' }
