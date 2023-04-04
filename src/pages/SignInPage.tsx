@@ -1,27 +1,18 @@
 import type { AxiosError } from 'axios'
-import axios from 'axios'
 import type { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
 import { Input } from '../components/Input'
 import { TopNav } from '../components/TopNav'
-import { ajax } from '../lib/ajax'
+import { useAjax } from '../lib/ajax'
 import type { FormError } from '../lib/validate'
 import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignInStore'
-import { usePopup } from '../hooks/usePopup'
 
-const Spin = styled(Icon)`
-animation: spin 1s linear infinite;
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-`
 export const SignInPage: React.FC = () => {
   const { data, error, setData, setError } = useSignInStore()
+  const { post } = useAjax({ showLoading: true })
   const nav = useNavigate()
   const onSubmitError = (err: AxiosError<{ errors: FormError<typeof data> }>) => {
     setError(err.response?.data?.errors ?? {})
@@ -38,7 +29,7 @@ export const SignInPage: React.FC = () => {
     setError(newError)
     if (!hasError(newError)) {
       // 发送请求
-      const response = await ajax.post<{ jwt: string }>('http://121.196.236.94:8080/api/v1/session', data)
+      const response = await post<{ jwt: string }>('http://121.196.236.94:8080/api/v1/session', data)
         .catch(onSubmitError)
       // 获取 JWT
       const jwt = response.data.jwt
@@ -49,11 +40,6 @@ export const SignInPage: React.FC = () => {
       nav('/home')
     }
   }
-  const { popup, hide, show } = usePopup({
-    initialVisible: false,
-    children: <div><Spin className="w-32px h-32px" name="loading"/></div>,
-    position: 'center'
-  })
   const sendSmsCode = async () => {
     const newError = validate({ email: data.email }, [
       { key: 'email', type: 'pattern', regex: /^.+@.+$/, message: '邮箱地址格式不正确' }
@@ -61,15 +47,13 @@ export const SignInPage: React.FC = () => {
     setError(newError)
     if (hasError(newError)) { throw new Error('表单出错') }
     // 请求
-    show()
-    const response = await axios.post('http://121.196.236.94:8080/api/v1/validation_codes', {
+    const response = await post('http://121.196.236.94:8080/api/v1/validation_codes', {
       email: data.email
-    }).finally(() => { hide() })
+    })
     return response
   }
   return (
     <div>
-      {popup}
       <Gradient>
         <TopNav title="登录" icon={ <Icon name="back"/> } />
       </Gradient>
