@@ -51,11 +51,11 @@ export const router = createBrowserRouter([
     }
   },
   { path: '/items/new', element: <ItemsNewPage /> },
+  { path: '/tags', element: <div>标签</div> },
   { path: '/tags/new', element: <TagsNewPage/> },
   { path: '/tags/:id', element: <TagsEditPage /> },
   { path: '/sign_in', element: <SignInPage /> },
   { path: '/statistics', element: <StatisticsPage /> },
   { path: '/export', element: <div>敬请期待</div> },
-  { path: '/tags', element: <div>标签</div> },
   { path: '/noty', element: <div>敬请期待</div> },
 ])
