@@ -22,7 +22,7 @@ export const ItemsList: React.FC<Props> = () => {
   const { data, error, size, setSize } = useSWRInfinite(
     getKey,
     async path => (await get<Resources<Item>>(path)).data,
-    { revalidateFirstPage: true }
+    { revalidateFirstPage: false }
   )
   const onLoadMore = () => {
     setSize(size + 1)
