@@ -4,6 +4,7 @@
     "curly": "off",
     "max-statements-per-line": ["error", { "max": 3 }],
     "arrow-parens": "off",
+    "object-property-newline": "off",
     "unicorn/prefer-includes": "off",
     "symbol-description": "off",
     "no-alert": "off",
