@@ -3,17 +3,14 @@ import { Gradient } from '../components/Gradient'
 import { TopNav } from '../components/TopNav'
 import { useAjax } from '../lib/ajax'
 import { BackIcon } from '../components/BackIcon'
+import { confirmable } from '../lib/confirmable'
 import { TagForm } from './TagsNewPage/TagForm'
 
 export const TagsEditPage: React.FC = () => {
-  const comfirmable = (fn: () => void) => () => {
-    const result = window.confirm('确定要删除吗？')
-    if (result) { fn() }
-  }
   const { id } = useParams()
   const { destroy } = useAjax({ showLoading: true, handleError: true })
   const nav = useNavigate()
-  const onDelete = comfirmable(async () => {
+  const onDelete = confirmable(async () => {
     if (!id) { throw new Error('id 不能为空') }
     await destroy(`/api/v1/tags/${id}`).catch((error) => { window.alert('删除失败'); throw error })
     window.alert('删除成功')
