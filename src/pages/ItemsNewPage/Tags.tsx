@@ -31,6 +31,9 @@ export const Tags: React.FC<Props> = (props) => {
     async path => (await get<Resources<Tag>>(path)).data,
     { revalidateFirstPage: false }
   )
+  const onLoadMore = () => {
+    setSize(size + 1)
+  }
   const isLoadingInitialData = !data && !error
   const isLoadingMore = data?.[size - 1] === undefined && !error
   const isLoading = isLoadingInitialData || isLoadingMore
