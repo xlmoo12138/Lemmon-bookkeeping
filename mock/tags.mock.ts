@@ -10,7 +10,7 @@ export const create = (attrs?: Partial<Tag>): Tag => {
   return {
     id: createId(),
     user_id: 1,
-    name: '标签',
+    name: faker.lorem.word(),
     sign: faker.internet.emoji(),
     deleted_at: null,
     created_at: faker.date.past().toISOString(),
@@ -54,6 +54,24 @@ export const tagsMock: MockMethod[] = [{
       // errors: {
       //   name: ['不合法']
       // }
+    }
+  }
+}, {
+  url: '/api/v1/tags/:id',
+  method: 'patch',
+  statusCode: 200,
+  response: ({ query }: ResponseParams): Resource<Tag> => {
+    return {
+      resource: create()
+    }
+  }
+}, {
+  url: '/api/v1/tags/:id',
+  method: 'get',
+  statusCode: 200,
+  response: ({ query }: ResponseParams): Resource<Tag> => {
+    return {
+      resource: create()
     }
   }
 }]
