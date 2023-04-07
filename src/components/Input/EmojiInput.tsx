@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { emojis } from '../../lib/emojis'
-import st from '../../pages/TagsNewPage.module.scss'
 import s from './EmojiInput.module.scss'
 
 type Props = {
@@ -15,7 +14,7 @@ export const EmojiInput: React.FC<Props> = (props) => {
       <div flex p-8px gap-x-16px overflow-auto text="#999">
         {emojis.map(emoji =>
           <span whitespace-nowrap key={emoji.name}
-            className={emoji.name === emojiKind ? st.selectedTag : ''}
+            className={emoji.name === emojiKind ? s.selectedTab : ''}
             onClick={() => setEmojiKind(emoji.name)}>{emoji.name}</span>
         )}
       </div>
