@@ -42,6 +42,15 @@ export const itemsMock: MockMethod[] = [{
   method: 'get',
   statusCode: 200,
   response: ({ query }: ResponseParams): Resources<Item> => {
-    return createResponse({ count: 30, perPage: 10, page: parseInt(query.page) || 1 })
+    return createResponse({ count: 91, perPage: 10, page: parseInt(query.page) || 1 })
+  },
+}, {
+  url: '/api/v1/items',
+  method: 'post',
+  statusCode: 200,
+  response: ({ query }: ResponseParams): Resource<Item> => {
+    return {
+      resource: create()
+    }
   },
 }]

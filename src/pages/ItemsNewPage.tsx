@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Gradient } from '../components/Gradient'
-import { Icon } from '../components/Icon'
 import { Tabs } from '../components/Tabs'
 import { TopNav } from '../components/TopNav'
 import { useCreateItemStore } from '../stores/useCreateItemStore'
 import { hasError, validate } from '../lib/validate'
 import { useAjax } from '../lib/ajax'
+import { BackIcon } from '../components/BackIcon'
 import s from './ItemsNewPage.module.scss'
 import { ItemAmount } from './ItemsNewPage/ItemAmount'
 import { Tags } from './ItemsNewPage/Tags'
@@ -24,6 +25,7 @@ export const ItemsNewPage: React.FC = () => {
     }
   ]
   const { post } = useAjax({ showLoading: true, handleError: true })
+  const nav = useNavigate()
   const onSubmit = async () => {
     const error = validate(data, [
       { key: 'kind', type: 'required', message: '请选择类型：收入或支出' },
@@ -38,13 +40,14 @@ export const ItemsNewPage: React.FC = () => {
       alert(message)
     } else {
       const response = await post<Resource<Item>>('/api/v1/items', data)
+      nav('/items')
       window.console.log(response.data.resource)
     }
   }
   return (
     <div className={s.wrapper} h-screen flex flex-col >
       <Gradient className="grow-0 shrink-0">
-        <TopNav title="记一笔" icon={<Icon name="back" />} />
+        <TopNav title="记一笔" icon={<BackIcon />} />
       </Gradient>
       <Tabs tabItems={tabItems} className='text-center grow-1 shrink-1 overflow-hidden'
         value={data.kind!} classPrefix='itemsNewPage'
