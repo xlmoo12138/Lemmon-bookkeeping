@@ -60,7 +60,12 @@ export const useAjax = (options?: Options) => {
         if (showLoading) { setVisible(false) }
       })
     },
-    delete: () => { }
+    destroy: <T>(path: string) => {
+      if (showLoading) { setVisible(true) }
+      return axios.delete<T>(path).catch(onError).finally(() => {
+        if (showLoading) { setVisible(false) }
+      })
+    },
   }
   return ajax
 }
