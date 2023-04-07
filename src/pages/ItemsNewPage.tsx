@@ -12,11 +12,11 @@ import { Tags } from './ItemsNewPage/Tags'
 import { ItemDate } from './ItemsNewPage/ItemDate'
 
 export const ItemsNewPage: React.FC = () => {
-  const { data, error, setData, setError } = useCreateItemStore()
+  const { data, setData, setError } = useCreateItemStore()
   const tabItems: { key: Item['kind']; text: string; element?: ReactNode }[] = [
     {
       key: 'expenses', text: '支出', element: <Tags kind='expenses'
-          value={data.tag_ids} onChange={(ids) => setData({ tag_ids: ids })} />
+        value={data.tag_ids} onChange={(ids) => setData({ tag_ids: ids })} />
     },
     {
       key: 'income', text: '收入', element: <Tags kind='income'
@@ -38,7 +38,7 @@ export const ItemsNewPage: React.FC = () => {
       alert(message)
     } else {
       const response = await post<Resource<Item>>('/api/v1/items', data)
-      console.log(response.data.resource)
+      window.console.log(response.data.resource)
     }
   }
   return (
