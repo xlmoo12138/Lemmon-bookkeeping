@@ -13,7 +13,7 @@ type Props = {
   | { type: 'text' }
   | { type: 'emoji' }
   | { type: 'sms_code'; request: () => Promise<unknown> }
-  | { type: 'select'; options: { value: string; text: string }[] }
+  | { type?: 'select'; options?: { value: string; text: string }[] }
 )
 export const Input: React.FC<Props> = (props) => {
   const { label, placeholder, type, value, onChange, error, disableError } = props
@@ -28,7 +28,7 @@ export const Input: React.FC<Props> = (props) => {
       case 'select':
         return <select value={value} onChange={e => onChange?.(e.target.value)}
         className="h-36px w-128px">
-          {props.options.map(option =>
+          {props.options?.map(option =>
             <option key={option.value} value={option.value}>{option.text}</option>)}
         </select>
       case 'sms_code':
