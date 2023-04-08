@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 import { Gradient } from '../components/Gradient'
 import { Icon } from '../components/Icon'
 import type { TimeRange } from '../components/TimeRangePicker'
@@ -8,24 +9,32 @@ import { LineChart } from '../components/LineChart'
 import { PieChart } from '../components/PieChart'
 import { RankChart } from '../components/RankChart'
 import { Input } from '../components/Input'
+import { time } from '../lib/time'
+import { useAjax } from '../lib/ajax'
 
+type Groups = { happen_at: string; amount: number }[]
 export const StatisticsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('thisMonth')
-  const [x, setX] = useState('expenses')
-  const items = [
-    { date: '2000-1-1', value: 15000 },
-    { date: '2000-1-3', value: 35000 },
-    { date: '2000-1-4', value: 45000 },
-    { date: '2000-1-5', value: 55000 },
-    { date: '2000-1-6', value: 65000 },
-    { date: '2000-1-7', value: 75000 },
-    { date: '2000-1-8', value: 85000 },
-    { date: '2000-1-9', value: 95000 },
-    { date: '2000-1-10', value: 105000 },
-    { date: '2000-1-11', value: 115000 },
-    { date: '2000-1-12', value: 125000 },
-    { date: '2000-1-31', value: 135000 }
-  ].map(item => ({ x: item.date, y: item.value / 100 }))
+  const [kind, setKind] = useState('expenses')
+  const { get } = useAjax({ showLoading: false, handleError: true })
+  const generateStartAndEnd = () => {
+    if (timeRange === 'thisMonth') {
+      const start = time().firstDayOfMonth.format('yyyy-MM-dd')
+      const end = time().lastDayOfMonth.add(1, 'day').format('yyyy-MM-dd')
+      return { start, end }
+    } else {
+      return { start: '', end: '' }
+    }
+  }
+  const { start, end } = generateStartAndEnd()
+  const { data: items } = useSWR(`/api/v1/items/summary?happened_after=${start}&happened_before=${end}&kind=${kind}&group_by=happen_at`,
+    async (path) =>
+      (await get<{ groups: Groups; total: number }>(path)).data.groups
+        .map(({ happen_at, amount }) => ({ x: happen_at, y: amount }))
+  )
+  useEffect(() => {
+    window.console.log(items)
+  }, [items])
   const items2 = [
     { tag: { name: '吃饭', sign: '😁' }, amount: 10000 },
     { tag: { name: '打车', sign: '🤬' }, amount: 20000 },
@@ -56,7 +65,7 @@ export const StatisticsPage: React.FC = () => {
           <Input type="select" options={[
             { text: '支出', value: 'expenses' },
             { text: '收入', value: 'income' },
-          ]} value={x} onChange={(value) => setX(value)} disableError/>
+          ]} value={kind} onChange={(value) => setKind(value)} disableError/>
         </div>
       </div>
       <div>{timeRange}</div>

@@ -19,8 +19,11 @@ export class Time {
   constructor(p?: number | string | Date) {
     this.#date = p ? new Date(p) : new Date()
   }
-  get lastDayofMonth() {
+  get lastDayOfMonth() {
     return new Time(new Date(this.year, this.month - 1 + 1, 0))
+  }
+  get firstDayOfMonth() {
+    return new Time(new Date(this.year, this.month - 1, 1))
   }
   /**
    * 格式化输出
