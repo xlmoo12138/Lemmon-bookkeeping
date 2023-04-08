@@ -10,7 +10,7 @@ const MyIcon = styled(Icon)`
   width: 32px; height: 32px; margin-right: 16px;
 `
 const items = [
-  { key: 'chart', icon: 'chart', text: '统计图表', to: '/chart' },
+  { key: 'chart', icon: 'chart', text: '统计图表', to: '/statistics' },
   { key: 'export', icon: 'export', text: '导出数据', to: '/export' },
   { key: 'tags', icon: 'category', text: '自定义标签', to: '/tags' },
   { key: 'noty', icon: 'noty', text: '记账提醒', to: '/noty' }
