@@ -13,7 +13,7 @@ type Props = {
   | { type: 'text' }
   | { type: 'emoji' }
   | { type: 'sms_code'; request: () => Promise<unknown> }
-  | { type?: 'select'; options?: { value: string; text: string }[] }
+  | { type: 'select'; options: { value: string; text: string }[] }
 )
 export const Input: React.FC<Props> = (props) => {
   const { label, placeholder, type, value, onChange, error, disableError } = props

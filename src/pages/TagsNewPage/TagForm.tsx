@@ -67,7 +67,7 @@ export const TagForm: React.FC<Props> = (props) => {
   }
   return (
     <form onSubmit={onSubmit} p-16px p-t-32px flex flex-col gap-y-8px>
-      <Input label='标签名' error={error.name?.[0]} value={data.name}
+      <Input type='text' label='标签名' error={error.name?.[0]} value={data.name}
         onChange={name => setData({ name })} />
       <Input type='emoji' label={<span>图标 <span text-24px leading-24px>{data.sign}</span></span>}
         value={data.sign} onChange={sign => setData({ sign })}
