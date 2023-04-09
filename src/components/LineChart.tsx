@@ -3,7 +3,7 @@ import * as echarts from 'echarts'
 
 type Props = {
   className?: string
-  items?: { x: number | string; y: number }[]
+  items?: { x: number | string; y: number | string }[]
 }
 export const LineChart: React.FC<Props> = (props) => {
   const { className, items } = props
@@ -12,6 +12,7 @@ export const LineChart: React.FC<Props> = (props) => {
   const yItems = items?.map(item => item.y)
   const initialized = useRef(false)
   const myChart = useRef<echarts.ECharts>()
+
   useEffect(() => {
     if (!divRef.current) { return }
     if (initialized.current) { return }
