@@ -52,11 +52,11 @@ export const StatisticsPage: React.FC = () => {
         .map(({ tag_id, tag, amount }) =>
           ({ name: tag.name, value: parseFloat((amount / 100).toFixed(2)), sign: tag.sign }))
   )
-  const items3 = [
-    { tag: { name: '吃饭', sign: '😁' }, amount: 10000 },
-    { tag: { name: '打车', sign: '🤬' }, amount: 20000 },
-    { tag: { name: '零食', sign: '🤡' }, amount: 68800 }
-  ].map(item => ({ name: item.tag.name, value: item.amount, sign: item.tag.sign }))
+  // const items3 = [
+  //   { tag: { name: '吃饭', sign: '😁' }, amount: 10000 },
+  //   { tag: { name: '打车', sign: '🤬' }, amount: 20000 },
+  //   { tag: { name: '零食', sign: '🤡' }, amount: 68800 }
+  // ].map(item => ({ name: item.tag.name, value: item.amount, sign: item.tag.sign }))
   return (
     <div>
       <Gradient>
@@ -80,10 +80,9 @@ export const StatisticsPage: React.FC = () => {
           ]} value={kind} onChange={(value) => setKind(value)} disableError/>
         </div>
       </div>
-      <div>{timeRange}</div>
       <LineChart className="h-120px" items={normalizedItems} />
       <PieChart className='h-260px m-t-16px' items={items2} />
-      <RankChart className='m-t-8px' items={items3}/>
+      <RankChart className='m-t-8px' items={items2}/>
     </div>
   )
 }
