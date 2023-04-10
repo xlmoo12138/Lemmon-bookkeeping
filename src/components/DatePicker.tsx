@@ -20,7 +20,7 @@ export const DatePicker: React.FC<Props> = (props) => {
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, index) => startTime.year + index)
   const monthList = Array.from({ length: 12 }).map((_, index) => index + 1)
-  const dayList = Array.from({ length: valueTime.current.lastDayofMonth.day }).map((_, index) => index + 1)
+  const dayList = Array.from({ length: valueTime.current.lastDayOfMonth.day }).map((_, index) => index + 1)
   return (
     <div>
       <div flex justify-between p-8px border-b-1 b="#f3f3f3" children-p-8px>
