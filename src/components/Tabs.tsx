@@ -12,7 +12,16 @@ type Props<T> = {
   className?: string
   classPrefix?: string
 }
-export const Tabs = <T extends string>(props: Props<T>) => {
+const compareKey = <T extends (string | { name: string })>(a: T, c: T) => {
+  if (typeof a === 'string' && typeof c === 'string') {
+    return a === c
+  } else if (a instanceof Object && c instanceof Object) {
+    return a.name === c.name
+  } else {
+    return false
+  }
+}
+export const Tabs = <T extends string | { name: string }>(props: Props<T>) => {
   const { tabItems, value, onChange, className, classPrefix } = props
   return (
     <div className={cs(className, classPrefix)} flex flex-col>
@@ -20,9 +29,10 @@ export const Tabs = <T extends string>(props: Props<T>) => {
         className={classPrefix ? `${classPrefix}-menu` : ''}
       >
         {tabItems.map(item =>
-          <li key={item.key} className={
+          <li key={typeof item.key === 'string' ? item.key : item.key.name}
+          className={
             cs(
-              item.key === value ? s.selected : '',
+              compareKey(item.key, value) ? s.selected : '',
               classPrefix ? `${classPrefix}-menu-item` : ''
             )
           }
@@ -31,7 +41,7 @@ export const Tabs = <T extends string>(props: Props<T>) => {
         </li>)}
       </ol>
       <div grow-1 shrink-1 overflow-auto className={classPrefix ? `${classPrefix}-pane` : ''}>
-        {tabItems.filter(item => item.key === value)[0].element}
+        {tabItems.filter(item => compareKey(item.key, value))[0]?.element}
       </div>
     </div>
   )
