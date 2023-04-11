@@ -64,9 +64,9 @@ export const Tags: React.FC<Props> = (props) => {
                    gap-y-8px select-none' onEnd={() => { nav(`/tags/${tag.id}`) }}>
                   {value?.includes(tag.id)
                     ? <span w-48px h-48px rounded='24px' bg="#EFEFEF"
-                      flex justify-center items-center text-24px b-1 b="#8F4CD7">{tag.sign}</span>
+                      flex justify-center items-center text-24px b-1 b-solid b="#8F4CD7">{tag.sign}</span>
                     : <span w-48px h-48px rounded='24px' bg="#EFEFEF"
-                      flex justify-center items-center text-24px b-1 b-transparent>{tag.sign}</span>
+                      flex justify-center items-center text-24px b-1 b-solid b-transparent>{tag.sign}</span>
                   }
                     <span text-12px text="#666">{tag.name}</span>
                 </LongPressable>
