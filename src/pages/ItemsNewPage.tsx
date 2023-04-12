@@ -39,10 +39,8 @@ export const ItemsNewPage: React.FC = () => {
       const message = Object.values(error).flat().join('\n')
       alert(message)
     } else {
-      const response = await post<Resource<Item>>('/api/v1/items', data)
+      await post<Resource<Item>>('/api/v1/items', data)
       nav('/items')
-      window.console.log(response.data.resource)
-      // TODO: 这里好像还没做完？
     }
   }
   return (
