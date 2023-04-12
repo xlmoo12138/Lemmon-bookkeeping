@@ -1,4 +1,4 @@
-export const confirmable = (fn: () => void) => () => {
-  const result = window.confirm('确定要删除吗？')
+export const confirmable = (title: string, fn: () => void) => () => {
+  const result = window.confirm(title)
   if (result) { fn() }
 }
