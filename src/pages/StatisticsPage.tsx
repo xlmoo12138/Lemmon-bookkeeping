@@ -93,7 +93,7 @@ export const StatisticsPage: React.FC = () => {
           <Input type="select" options={[
             { text: '支出', value: 'expenses' },
             { text: '收入', value: 'income' },
-          ]} value={kind} onChange={(value) => setKind(value as Item['kind'])} disableError/>
+          ]} value={kind} onChange={(value) => setKind(value)} disableError/>
         </div>
       </div>
       <LineChart className="h-120px" items={normalizedItems} />
