@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import useSWR from 'swr'
 import { Gradient } from '../components/Gradient'
-import { Icon } from '../components/Icon'
 import type { TimeRange } from '../components/TimeRangePicker'
 import { TimeRangePicker } from '../components/TimeRangePicker'
 import { TopNav } from '../components/TopNav'
@@ -12,6 +11,7 @@ import { Input } from '../components/Input'
 import type { Time } from '../lib/time'
 import { time } from '../lib/time'
 import { useAjax } from '../lib/ajax'
+import { BackIcon } from '../components/BackIcon'
 
 type Groups = { happen_at: string; amount: number }[]
 type Groups2 = { tag_id: number; tag: Tag; amount: number }[]
@@ -65,7 +65,7 @@ export const StatisticsPage: React.FC = () => {
     <div>
       <Gradient>
         <TopNav title="统计图表" icon={
-          <Icon name="back" className="w-24px h-24px" />
+          <BackIcon />
         } />
       </Gradient>
       <TimeRangePicker selected={timeRange} onSelect={setTimeRange}
