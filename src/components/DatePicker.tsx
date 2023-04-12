@@ -17,7 +17,7 @@ export const DatePicker: React.FC<Props> = (props) => {
     throw new Error('结束时间必须晚于开始时间')
   }
   const [, update] = useState({})
-  const valueTime = useRef(value ? time(value).set({ hours: 0, minutes: 0, seconds: 0, ms: 0 }) : getNow())
+  const valueTime = useRef(value ? time(value).removeTime() : getNow())
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, index) => startTime.year + index)
   const monthList = Array.from({ length: 12 }).map((_, index) => index + 1)

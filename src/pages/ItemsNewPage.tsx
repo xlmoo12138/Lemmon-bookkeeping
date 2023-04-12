@@ -7,6 +7,7 @@ import { useCreateItemStore } from '../stores/useCreateItemStore'
 import { hasError, validate } from '../lib/validate'
 import { useAjax } from '../lib/ajax'
 import { BackIcon } from '../components/BackIcon'
+import { time } from '../lib/time'
 import s from './ItemsNewPage.module.scss'
 import { ItemAmount } from './ItemsNewPage/ItemAmount'
 import { Tags } from './ItemsNewPage/Tags'
@@ -40,6 +41,7 @@ export const ItemsNewPage: React.FC = () => {
       alert(message)
     } else {
       await post<Resource<Item>>('/api/v1/items', data)
+      setData({ amount: 0, happen_at: time().isoString })
       nav('/items')
     }
   }
