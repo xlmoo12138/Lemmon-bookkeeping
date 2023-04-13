@@ -1,7 +1,6 @@
 import useSWR from 'swr'
 import { Link, Navigate } from 'react-router-dom'
 import { useAjax } from '../lib/ajax'
-import { Loading } from '../components/Loading'
 import { AddItemFloatButton } from '../components/AddItemFloatButton'
 import { Icon } from '../components/Icon'
 
@@ -21,7 +20,11 @@ export const Home: React.FC = () => {
   const isLoadingItems = meData && !itemsData && !itemsError
 
   if (isLoadingMe || isLoadingItems) {
-    return <Loading className='h-screen' message='正在加载页面，请稍等'/>
+    return (
+      <div flex justify-center items-center h-screen>
+        <div text-center p-16px>正在加载页面，请稍等</div>
+      </div>
+    )
   }
 
   if (itemsData?.resources[0]) {
@@ -43,3 +46,5 @@ export const Home: React.FC = () => {
     </div>
   )
 }
+
+export default Home
