@@ -8,7 +8,7 @@ type Props = {
   onCancel?: () => void
   onConfirm?: (value: Date) => void
 }
-const getNow = () => time().set({ hours: 0, minutes: 0, seconds: 0, ms: 0 })
+const getNow = () => time()
 export const DatePicker: React.FC<Props> = (props) => {
   const { start, end, value, onCancel, onConfirm } = props
   const startTime = start ? time(start) : getNow().add(-10, 'years')
