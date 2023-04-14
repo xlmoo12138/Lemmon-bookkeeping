@@ -19,7 +19,7 @@ export const WelcomeLayout: React.FC = () => {
   const location = useLocation()
   const map = useRef<Record<string, ReactNode>>({})
   const outlet = useOutlet()
-  const [extraStyle, setExtraStyle] = useState<{ position: 'relative' | 'absolute' }>({ position: 'relative' })
+  const [extraStyle, setExtraStyle] = useState<{ position: 'absolute' }>({ position: 'absolute' })
   map.current[location.pathname] = outlet
 
   const transitions = useTransition(location.pathname, {
@@ -32,7 +32,7 @@ export const WelcomeLayout: React.FC = () => {
     },
     onRest: () => {
       animating.current = false
-      setExtraStyle({ position: 'relative' })
+      setExtraStyle({ position: 'absolute' })
     }
   })
 
