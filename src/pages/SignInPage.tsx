@@ -55,7 +55,7 @@ export const SignInPage: React.FC = () => {
         <TopNav title="登录" icon={ <Icon name="back"/> } />
       </Gradient>
       <div text-center pt-40px pb-16px>
-        <Icon name="logo" className='w-64px h-68px' />
+        <Icon name="logo" className='w-64px h-69px' />
         <h1 text-32px text="#7878FF" font-bold>柠萌记账</h1>
       </div>
       <form j-form onSubmit={onSubmit}>

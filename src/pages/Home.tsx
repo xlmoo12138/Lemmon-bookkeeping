@@ -2,7 +2,8 @@ import useSWR from 'swr'
 import { Link, Navigate } from 'react-router-dom'
 import { useAjax } from '../lib/ajax'
 import { AddItemFloatButton } from '../components/AddItemFloatButton'
-import { Icon } from '../components/Icon'
+import homeAnimation from '../assets/json/home.json'
+import { WelcomeAnimation } from '../components/WelcomeAnimation'
 
 export const Home: React.FC = () => {
   const { get } = useAjax({ showLoading: true, handleError: false })
@@ -35,7 +36,7 @@ export const Home: React.FC = () => {
   return (
     <div>
       <div flex justify-center>
-      <Icon className="mt-20vh mb-20vh w-128px h-128px" name="pig" />
+      <WelcomeAnimation className='mt-20vh mb-5vh' animationData={homeAnimation} />
       </div>
       <div px-16px>
         <Link to='/items/new'>

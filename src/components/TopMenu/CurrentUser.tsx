@@ -19,7 +19,7 @@ export const CurrentUser: React.FC<Props> = ({ className }) => {
     window.location.reload()
   })
   return (
-    <div block className={className} bg="#5C33BE" text-white w="100%" pt-32px pb-44px
+    <div block className={className} bg="#af7de4" text-white w="100%" pt-32px pb-44px
       px-16px>
        {error
          ? (

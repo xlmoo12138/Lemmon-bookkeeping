@@ -25,7 +25,7 @@ export const Tabs = <T extends string | { name: string }>(props: Props<T>) => {
   const { tabItems, value, onChange, className, classPrefix } = props
   return (
     <div className={cs(className, classPrefix)} flex flex-col>
-      <ol flex grow-0 shrink-0 text-white children-px-24px children-py-12px bg="[rgb(143,76,215)]"
+      <ol flex grow-0 shrink-0 text-white children-px-24px children-py-12px bg="#c09ee4"
         className={classPrefix ? `${classPrefix}-menu` : ''}
       >
         {tabItems.map(item =>
